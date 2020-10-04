@@ -4,7 +4,7 @@ const Study = require('../Model/Study')
 
 /* ------------------------------- Test Route ------------------------------- */
 
-router.get('/', async (req, res) => {
+router.get('/study', async (req, res) => {
   const notes = await Study.find({})
   res.send('notes')
   console.log(notes);

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 require('../db/mongoose');
+const validator = require('validator').default;
 
 /* -------------- SKELETON OF STUDY SCHEMA - WILL CHANGE SOON -------------- */
 
@@ -11,16 +12,18 @@ const studySchema = new mongoose.Schema({
         type: String,
     },
     time_allotted: {
-        type: String,
+        type: Number,
     },
     time_spent: {
-        type: String,
+        type: Number,
     },
     date: {
-        type: String,
+        type: Date,
+        default: Date.now,
     },
     notes: {
         type: String,
+        required: true,
     },
 });
 
