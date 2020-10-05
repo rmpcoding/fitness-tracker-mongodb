@@ -18,7 +18,7 @@ router.patch('/users/update/:id', async (req, res) => {
     res.send('test from patch route');
 });
 
-router.delete('/users/:id', async (req, res) => {
+router.delete('/users/delete/:id', async (req, res) => {
     console.log('test');
     res.send('test from delete route');
 });
