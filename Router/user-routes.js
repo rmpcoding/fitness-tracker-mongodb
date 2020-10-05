@@ -8,4 +8,19 @@ router.get('/users', async (req, res) => {
     console.log(users);
 });
 
+router.post('/users/create', async (req, res) => {
+    console.log('test');
+    res.send('test from post route');
+});
+
+router.patch('/users/update/:id', async (req, res) => {
+    console.log('test');
+    res.send('test from patch route');
+});
+
+router.delete('/users/:id', async (req, res) => {
+    console.log('test');
+    res.send('test from delete route');
+});
+
 module.exports = router;
