@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { isEmail, contains } = require('validator').default;
+const bcrypt = require('bcryptjs');
 
 require('../db/mongoose');
 
@@ -15,8 +16,8 @@ const userSchema = new mongoose.Schema({
         trim: true,
         validate: (email) => {
             if (!isEmail(email)) {
-                throw new Error('Invalid email')
-            } 
+                throw new Error('Invalid email');
+            }
         },
     },
     password: {
@@ -31,6 +32,18 @@ const userSchema = new mongoose.Schema({
         },
     },
 });
+
+userSchema.method.hashPassword = async function (next) {
+    const user = this;
+    // IF user does not exist, hash password
+
+    if (!user) {
+        // untested code below:
+        // bcrypt.hash(user.password, 8)
+    }
+
+    next();
+};
 
 const User = mongoose.model('User', userSchema);
 
