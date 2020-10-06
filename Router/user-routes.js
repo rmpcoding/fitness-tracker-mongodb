@@ -10,12 +10,19 @@ router.get('/users', async (req, res) => {
     console.log(users);
 });
 
-/* ------------------------------- GET User by ID --------------------------- */
+/* ------------------------------- POST User -------------------------------- */
 
 
 router.post('/users/create', async (req, res) => {
-    console.log('test');
-    res.send('test from post route');
+    const user =  new User({...req.body})
+
+    try {
+        await user.save();
+        console.log(user);
+        res.send(user);
+    } catch(e) {
+        res.status(500).send(`Error: ${e}`);
+    }
 });
 
 /* ------------------------------- UPDATE User ------------------------------ */
