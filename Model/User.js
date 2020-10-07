@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { isEmail, contains } = require('validator').default;
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 require('../db/mongoose');
 
@@ -32,20 +33,42 @@ const userSchema = new mongoose.Schema({
         },
     },
     jsonwebtokens: [
-        // array of objects
-        // of jsonwebtokens
+        {
+            token: {
+                type: String,
+                required: true,
+            },
+        },
     ],
 });
 
-userSchema.methods.generateAuthToken = async function () {};
+/* -------------- Generates JSON web token after user creation -------------- */
+
+userSchema.methods.generateAuthToken = async function () {
+    const user = this;
+    const secret = 'secret_string';
+    const payloadObj = {
+        _id: user._id.toString(),
+    };
+
+    const token = jwt.sign(payloadObj, secret);
+    user.jsonwebtokens = user.jsonwebtokens.concat({ token });
+
+    await user.save();
+
+    return token;
+};
 
 userSchema.statics.loginByCredentials = async function (email, password) {};
 
+/* -------------------- PRE-SAVE HOOK: PASSWORD ENCRYPTION  ------------------- */
+
 userSchema.pre('save', async function (next) {
     const user = this;
+    const password = user.password;
 
     if (user.isModified('password')) {
-        const hashedPassword = await bcrypt.hash(user.password, 8);
+        const hashedPassword = await bcrypt.hash(password, 8);
         user.password = hashedPassword;
     }
 

@@ -13,14 +13,19 @@ router.get('/users', async (req, res) => {
 
 /* ------------------------------- CREATE User ------------------------------ */
 
-router.post('/users/create', auth, async (req, res) => {
+router.post('/users/create', async (req, res) => {
     const user = new User({ ...req.body });
 
     try {
         await user.save();
-        res.send(user);
+        const token = await user.generateAuthToken();
+        
+        res.status(201).send({
+            user,
+            token
+        });
     } catch (e) {
-        res.status(500).send(`Error: ${e}`);
+        res.status(400).send(`Error: ${e}`);
     }
 });
 
