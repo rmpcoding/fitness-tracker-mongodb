@@ -32,6 +32,9 @@ const userSchema = new mongoose.Schema({
             }
         },
     },
+
+/* ----------- Stores JSONwebtokens to login from multiple devices ---------- */
+
     jsonwebtokens: [
         {
             token: {
@@ -59,7 +62,26 @@ userSchema.methods.generateAuthToken = async function () {
     return token;
 };
 
-userSchema.statics.loginByCredentials = async function (email, password) {};
+
+/* ------------------------------ LOGS IN USER ------------------------------ */
+
+userSchema.statics.loginByCredentials = async function (email, password) {
+    const user = this;
+
+    User.find({ email })
+
+    if (!user) {
+        throw new Error('Invalid Credentials!')
+    }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+        throw new Error('Invalid Credentials!')
+    }
+    
+    return user;
+};
 
 /* -------------------- PRE-SAVE HOOK: PASSWORD ENCRYPTION  ------------------- */
 

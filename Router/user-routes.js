@@ -3,15 +3,7 @@ const router = express.Router();
 const User = require('../Model/User');
 const auth = require('../middleware/auth');
 
-/* ------------------------------- GET Users -------------------------------- */
-
-router.get('/users', async (req, res) => {
-    const users = await User.find({});
-    res.send(users);
-    console.log(users);
-});
-
-/* ------------------------------- CREATE User ------------------------------ */
+/* ------------------------------- CREATE User ------------------------------- */
 
 router.post('/users/create', async (req, res) => {
     const user = new User({ ...req.body });
@@ -19,24 +11,38 @@ router.post('/users/create', async (req, res) => {
     try {
         await user.save();
         const token = await user.generateAuthToken();
-        
+
         res.status(201).send({
             user,
-            token
+            token,
         });
     } catch (e) {
         res.status(400).send(`Error: ${e}`);
     }
 });
 
-/* ------------------------------- UPDATE User ------------------------------ */
+/* ------------------------------- LOGIN User -------------------------------- */
+
+router.get('/users/login', async (req, res) => {
+
+    try {
+        const user = await loginByCredentials(req.body.email, req.body.password);
+    
+        res.send(users);
+    } catch (e) {
+        res.status(401).send(e)
+    }
+
+});
+
+/* ------------------------------- UPDATE User ------------------------------- */
 
 router.patch('/users/update/:id', async (req, res) => {
     console.log('test');
     res.send('test from patch route');
 });
 
-/* ------------------------------- DELETE User ------------------------------ */
+/* ------------------------------- DELETE User ------------------------------- */
 
 router.delete('/users/delete/:id', async (req, res) => {
     console.log('test');
