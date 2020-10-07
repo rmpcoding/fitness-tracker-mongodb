@@ -1,14 +1,15 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const User = require('../Model/User');
 
-const auth = async (req, res) => {
-    // Attach authentication via JSON web tokens to requests
-    // Create login route to direct over to here, 
-    // OR post route can immediately direct to here
+const auth = async (req, res, next) => {
 
-    // password must be HASHED password
-    bcrypt.compare(req.body.password, password);
-
-}
+    try {
+        console.log(req.body.password)
+        next();
+    } catch (e) {
+        throw new Error('Invalid Login!');
+    }
+};
 
 module.exports = auth;

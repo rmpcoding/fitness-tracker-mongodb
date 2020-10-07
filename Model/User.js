@@ -31,19 +31,26 @@ const userSchema = new mongoose.Schema({
             }
         },
     },
+    jsonwebtokens: [
+        // array of objects
+        // of jsonwebtokens
+    ],
 });
 
-userSchema.method.hashPassword = async function (next) {
-    const user = this;
-    // IF user does not exist, hash password
+userSchema.methods.generateAuthToken = async function () {};
 
-    if (!user) {
-        // untested code below:
-        // bcrypt.hash(user.password, 8)
+userSchema.statics.loginByCredentials = async function (email, password) {};
+
+userSchema.pre('save', async function (next) {
+    const user = this;
+
+    if (user.isModified('password')) {
+        const hashedPassword = await bcrypt.hash(user.password, 8);
+        user.password = hashedPassword;
     }
 
     next();
-};
+});
 
 const User = mongoose.model('User', userSchema);
 

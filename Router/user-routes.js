@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../Model/User');
+const auth = require('../middleware/auth');
 
 /* ------------------------------- GET Users -------------------------------- */
 
@@ -10,17 +11,15 @@ router.get('/users', async (req, res) => {
     console.log(users);
 });
 
-/* ------------------------------- POST User -------------------------------- */
+/* ------------------------------- CREATE User ------------------------------ */
 
-
-router.post('/users/create', async (req, res) => {
-    const user =  new User({...req.body})
+router.post('/users/create', auth, async (req, res) => {
+    const user = new User({ ...req.body });
 
     try {
         await user.save();
-        console.log(user);
         res.send(user);
-    } catch(e) {
+    } catch (e) {
         res.status(500).send(`Error: ${e}`);
     }
 });
