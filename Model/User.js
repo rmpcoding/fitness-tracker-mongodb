@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const { isEmail, contains } = require('validator').default;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const Study = require('./Study')
 
 require('../db/mongoose');
 
@@ -95,6 +96,18 @@ userSchema.pre('save', async function (next) {
 
     next();
 });
+
+/* -------------------- PRE-DELETE HOOK: REMOVES STUDY NOTES  ----------------- */
+
+userSchema.pre('remove', async function (next) {
+    const user = this;
+
+    await Study.deleteMany({
+        owner: user._id
+    })
+
+    next()
+})
 
 const User = mongoose.model('User', userSchema);
 

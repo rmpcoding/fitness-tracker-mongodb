@@ -50,7 +50,7 @@ router.get('/users/profile', auth, async (req, res) => {
 
 /* ------------------------------- UPDATE User ------------------------------- */
 
-router.patch('/users/update/:id', async (req, res) => {
+router.patch('/users/update/:id', auth, async (req, res) => {
     console.log('test');
     res.send('test from patch route');
 });
