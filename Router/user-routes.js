@@ -4,7 +4,7 @@ const User = require('../Model/User');
 const auth = require('../middleware/auth');
 
 /* ------------------------------- CREATE User ------------------------------- */
-
+// Does not require Auth middleware
 router.post('/users/create', async (req, res) => {
     const user = new User({ ...req.body });
 
@@ -22,17 +22,28 @@ router.post('/users/create', async (req, res) => {
 });
 
 /* ------------------------------- LOGIN User -------------------------------- */
-
-router.get('/users/login', async (req, res) => {
+// Does not require Auth middleware
+router.post('/users/login', async (req, res) => {
+    console.log(req.body.email)
+    console.log(req.body.password)
 
     try {
         const user = await loginByCredentials(req.body.email, req.body.password);
-    
-        res.send(users);
+        res.send(user);
     } catch (e) {
-        res.status(401).send(e)
+        res.status(401).send('Invalid Login!')
     }
 
+});
+
+/* -------------------------------- READ User -------------------------------- */
+
+router.get('/users/profile', auth, async (req, res) => {
+    try {
+        res.send(req.user)
+    } catch (e) {
+        res.status(401).send()
+    } 
 });
 
 /* ------------------------------- UPDATE User ------------------------------- */

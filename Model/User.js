@@ -33,8 +33,7 @@ const userSchema = new mongoose.Schema({
         },
     },
 
-/* ----------- Stores JSONwebtokens to login from multiple devices ---------- */
-
+    // Stores JSONwebtokens to login from multiple devices
     jsonwebtokens: [
         {
             token: {
