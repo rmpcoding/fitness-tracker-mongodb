@@ -25,6 +25,9 @@ const studySchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    owner: {
+        // reference to the authenticated owner
+    }
 });
 
 const Study = mongoose.model('Study', studySchema)
