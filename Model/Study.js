@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 require('../db/mongoose');
 const validator = require('validator').default;
 
@@ -27,9 +28,12 @@ const studySchema = new mongoose.Schema({
     },
     owner: {
         // reference to the authenticated owner
-    }
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User',
+    },
 });
 
-const Study = mongoose.model('Study', studySchema)
+const Study = mongoose.model('Study', studySchema);
 
 module.exports = Study;
