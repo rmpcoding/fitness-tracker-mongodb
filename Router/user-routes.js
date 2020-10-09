@@ -24,26 +24,28 @@ router.post('/users/create', async (req, res) => {
 /* ------------------------------- LOGIN User -------------------------------- */
 // Does not require Auth middleware
 router.post('/users/login', async (req, res) => {
-    console.log(req.body.email)
-    console.log(req.body.password)
+    console.log(req.body.email);
+    console.log(req.body.password);
 
     try {
-        const user = await loginByCredentials(req.body.email, req.body.password);
+        const user = await loginByCredentials(
+            req.body.email,
+            req.body.password
+        );
         res.send(user);
     } catch (e) {
-        res.status(401).send('Invalid Login!')
+        res.status(401).send('Invalid Login!');
     }
-
 });
 
 /* -------------------------------- READ User -------------------------------- */
 
 router.get('/users/profile', auth, async (req, res) => {
     try {
-        res.send(req.user)
+        res.send(req.user);
     } catch (e) {
-        res.status(401).send()
-    } 
+        res.status(401).send();
+    }
 });
 
 /* ------------------------------- UPDATE User ------------------------------- */
@@ -55,9 +57,15 @@ router.patch('/users/update/:id', async (req, res) => {
 
 /* ------------------------------- DELETE User ------------------------------- */
 
-router.delete('/users/delete/:id', async (req, res) => {
-    console.log('test');
-    res.send('test from delete route');
+router.delete('/users/delete', auth, async (req, res) => {
+    try {
+        const user = await User.findOneAndDelete({
+            _id: req.user._id,
+        });
+        res.send(user)
+    } catch {
+        res.status(400).send("Can't Delete Me!");
+    }
 });
 
 module.exports = router;

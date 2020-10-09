@@ -9,12 +9,12 @@ const auth = async (req, res, next) => {
         const token = req.header('Authorization').substring(7);
 
         // Decode token by way of using verify method -- store in a const
-        const decode = jwt.verify(token, 'secret_string');
-        console.log(decode)
+        const decoded = jwt.verify(token, 'secret_string');
 
-        // Find user in database using decoded id and original token
-        const user = await User.find({
-            _id: decode
+        // Find user in database using decoded _id and token value
+        const user = await User.findOne({
+            _id: decoded._id,
+            'jsonwebtokens.token': token,
         });
 
         if (!user) {
