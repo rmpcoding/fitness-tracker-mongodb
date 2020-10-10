@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { isEmail, contains } = require('validator').default;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const Study = require('./Study')
+const Study = require('./Study');
 
 require('../db/mongoose');
 
@@ -62,24 +62,31 @@ userSchema.methods.generateAuthToken = async function () {
     return token;
 };
 
+/* ----------------------- VIRTUAL REF TO STUDY NOTES ----------------------- */
+
+userSchema.virtual('study_notes', {
+    ref: 'Study',
+    localField: '_id',
+    foreignField: 'owner',
+});
 
 /* ------------------------------ LOGS IN USER ------------------------------ */
 
 userSchema.statics.loginByCredentials = async function (email, password) {
     const user = this;
 
-    User.find({ email })
+    User.find({ email });
 
     if (!user) {
-        throw new Error('Invalid Credentials!')
+        throw new Error('Invalid Credentials!');
     }
 
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        throw new Error('Invalid Credentials!')
+        throw new Error('Invalid Credentials!');
     }
-    
+
     return user;
 };
 
@@ -103,11 +110,11 @@ userSchema.pre('remove', async function (next) {
     const user = this;
 
     await Study.deleteMany({
-        owner: user._id
-    })
+        owner: user._id,
+    });
 
-    next()
-})
+    next();
+});
 
 const User = mongoose.model('User', userSchema);
 
