@@ -6,8 +6,9 @@ const auth = require('../middleware/auth');
 /* ------------------------------- POST ROUTE ------------------------------- */
 
 router.post('/study', auth, async (req, res) => {
+    const _id = req.user._id;
+
     try {
-        const _id = req.user._id;
         const study = new Study({ ...req.body, owner: _id });
         await study.save();
         res.send(study);
@@ -18,7 +19,7 @@ router.post('/study', auth, async (req, res) => {
 
 /* ------------------------------- GET Route -------------------------------- */
 
-router.get('/study', async (req, res) => {
+router.get('/study', auth, async (req, res) => {
     const notes = await Study.find({});
     console.log(notes);
     res.send('notes test');
