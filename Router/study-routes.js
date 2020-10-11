@@ -42,25 +42,36 @@ router.patch('/study/update/:id', async (req, res) => {
 
 /* ---------------------------- DELETE ONE ROUTE ---------------------------- */
 
-router.delete('/study/delete', auth, async (req, res) => {
-    console.log(req.body);
+router.delete('/study/delete/:id', auth, async (req, res) => {
+    const _id = req.params.id;
+    console.log(_id);
+
     try {
-        // const deleteNote = await Study.deleteOne({ })
-        // res.send(deleteNote);
-    } catch (e) {
-        res.status(400).send();
+        const deleteNote = await Study.deleteOne({ _id })
+
+        if (!deleteNote) {
+            res.status(404).send();
+        }
+
+        res.send(deleteNote);
+    } catch {
+        res.status(404).send();
     }
 });
 
 /* ---------------------------- DELETE ALL ROUTE ---------------------------- */
 
 router.delete('/study/deleteAll', auth, async (req, res) => {
-    console.log(req.body);
     try {
-        // const deleteAll = await Study.deleteMany({ })
-        // res.send(deleteAll);
-    } catch (e) {
-        res.status(400).send();
+        const deleteAll = await Study.remove({});
+
+        if (!deleteAll) {
+            res.status(404).send()
+        }
+
+        res.send(deleteAll);
+    } catch {
+        res.status(404).send();
     }
 });
 
