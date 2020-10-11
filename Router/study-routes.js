@@ -9,8 +9,13 @@ router.post('/study', auth, async (req, res) => {
     const _id = req.user._id;
 
     try {
-        const study = new Study({ ...req.body, owner: _id });
+        const study = new Study({
+            ...req.body,
+            owner: _id,
+        });
+
         await study.save();
+
         res.send(study);
     } catch (e) {
         throw new Error(`Error: ${e}`);
@@ -20,15 +25,25 @@ router.post('/study', auth, async (req, res) => {
 /* ------------------------------- GET Route -------------------------------- */
 
 router.get('/study', auth, async (req, res) => {
-    const notes = await Study.find({});
-    console.log(notes);
-    res.send(notes);
+    try {
+        const notes = await Study.find({
+            owner: req.user._id,
+        });
+        res.send(notes);
+    } catch {
+        res.status(404).send();
+    }
 });
 
 /* ------------------------------- GET Route by ID -------------------------- */
 
-router.get('/study/:id', async (req, res) => {
-    const notes = await Study.find({});
+router.get('/study/:id', auth, async (req, res) => {
+    const _id = req.params.id;
+
+    const notes = await Study.findOne({
+        _id,
+        owner: req.user._id,
+    });
     console.log(notes);
     res.send(notes);
 });
@@ -67,7 +82,7 @@ router.delete('/study/delete/:id', auth, async (req, res) => {
 router.delete('/study/deleteAll', auth, async (req, res) => {
     try {
         const deleteAll = await Study.deleteMany({
-            owner: req.user._id
+            owner: req.user._id,
         });
 
         if (!deleteAll) {
