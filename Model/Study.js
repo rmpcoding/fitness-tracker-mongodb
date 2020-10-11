@@ -13,10 +13,11 @@ const studySchema = new mongoose.Schema({
         type: String,
     },
     time_allotted: {
-        type: Number,
+        type: String,
+        default: 25,
     },
     time_spent: {
-        type: Number,
+        type: String,
     },
     date: {
         type: Date,
