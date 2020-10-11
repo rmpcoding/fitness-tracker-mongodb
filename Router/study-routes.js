@@ -66,7 +66,7 @@ router.delete('/study/delete/:id', auth, async (req, res) => {
 
 router.delete('/study/deleteAll', auth, async (req, res) => {
     try {
-        const deleteAll = await Study.remove({
+        const deleteAll = await Study.deleteMany({
             owner: req.user._id
         });
 
