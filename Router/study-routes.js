@@ -22,7 +22,7 @@ router.post('/study', auth, async (req, res) => {
 router.get('/study', auth, async (req, res) => {
     const notes = await Study.find({});
     console.log(notes);
-    res.send('notes test');
+    res.send(notes);
 });
 
 /* ------------------------------- GET Route by ID -------------------------- */
@@ -30,7 +30,7 @@ router.get('/study', auth, async (req, res) => {
 router.get('/study/:id', async (req, res) => {
     const notes = await Study.find({});
     console.log(notes);
-    res.send('notes by id');
+    res.send(notes);
 });
 
 /* ------------------------------- PATCH ROUTE ------------------------------ */
@@ -47,7 +47,10 @@ router.delete('/study/delete/:id', auth, async (req, res) => {
     console.log(_id);
 
     try {
-        const deleteNote = await Study.deleteOne({ _id })
+        const deleteNote = await Study.deleteOne({
+            _id,
+            owner: req.user._id,
+        });
 
         if (!deleteNote) {
             res.status(404).send();
@@ -63,10 +66,12 @@ router.delete('/study/delete/:id', auth, async (req, res) => {
 
 router.delete('/study/deleteAll', auth, async (req, res) => {
     try {
-        const deleteAll = await Study.remove({});
+        const deleteAll = await Study.remove({
+            owner: req.user._id
+        });
 
         if (!deleteAll) {
-            res.status(404).send()
+            res.status(404).send();
         }
 
         res.send(deleteAll);
