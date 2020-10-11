@@ -40,11 +40,28 @@ router.patch('/study/update/:id', async (req, res) => {
     res.send(req.body);
 });
 
-/* ------------------------------- DELETE ROUTE ----------------------------- */
+/* ---------------------------- DELETE ONE ROUTE ---------------------------- */
 
-router.delete('/study/delete/:id', async (req, res) => {
+router.delete('/study/delete', auth, async (req, res) => {
     console.log(req.body);
-    res.send(req.body);
+    try {
+        // const deleteNote = await Study.deleteOne({ })
+        // res.send(deleteNote);
+    } catch (e) {
+        res.status(400).send();
+    }
+});
+
+/* ---------------------------- DELETE ALL ROUTE ---------------------------- */
+
+router.delete('/study/deleteAll', auth, async (req, res) => {
+    console.log(req.body);
+    try {
+        // const deleteAll = await Study.deleteMany({ })
+        // res.send(deleteAll);
+    } catch (e) {
+        res.status(400).send();
+    }
 });
 
 module.exports = router;
