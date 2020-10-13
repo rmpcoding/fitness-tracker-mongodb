@@ -44,7 +44,11 @@ router.get('/study/:id', auth, async (req, res) => {
         _id,
         owner: req.user._id,
     });
-    console.log(notes);
+
+    if (!notes) {
+        return res.status(404).send();
+    }
+
     res.send(notes);
 });
 
