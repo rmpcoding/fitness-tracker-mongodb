@@ -50,9 +50,56 @@ router.get('/study/:id', auth, async (req, res) => {
 
 /* ------------------------------- PATCH ROUTE ------------------------------ */
 
-router.patch('/study/update/:id', async (req, res) => {
-    console.log(req.body);
-    res.send(req.body);
+router.patch('/study/update/:id', auth, async (req, res) => {
+    // Store user in a const named user
+    const user = req.user;
+    // Store update requests from request body in an array
+    const requestUpdates = req.body;
+    // Store params in a const _id
+    const _id = req.params.id;
+    // Store updates from request body into an array containing only the request body's properties (e.g., [name, email] etc...)
+    const updateArrayFromUser = Object.keys(requestUpdates);
+    // Store array of updateable properties (user shouldn't update _id, tokens, or any other information as such)
+    const allowedUpdates = [
+        'subject',
+        'source',
+        'time_allotted',
+        'time_spent',
+        'date',
+        'notes',
+    ];
+    // Check to see if every element from User's updates from request body passes the next condition
+    const isValidOperation = updateArrayFromUser.every((update) => {
+        // Checks to see whether the User's updates from request body is included in allowed updates array
+        return allowedUpdates.includes(update);
+    });
+
+    // If operation is not allowed, deny user ability to change information
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid Operation' });
+    }
+
+    try {
+        const updatedNote = await Study.findOne({
+            _id,
+            owner: user._id,
+        });
+
+        if (!updatedNote) {
+            return res.status(404).send();
+        }
+
+        updateArrayFromUser.forEach((update) => {
+            // Update property field will be updated from request body
+            return updatedNote[update] = requestUpdates[update];
+        });
+        // Save updatedNote updates in database
+        await updatedNote.save();
+        // Send updatedNote data
+        res.send(updatedNote)
+    } catch (e) {
+        res.status(400).send(`Error: ${e}`);
+    }
 });
 
 /* ---------------------------- DELETE ONE ROUTE ---------------------------- */
