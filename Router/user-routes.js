@@ -50,9 +50,39 @@ router.get('/users/profile', auth, async (req, res) => {
 
 /* ------------------------------- UPDATE User ------------------------------- */
 
-router.patch('/users/update/:id', auth, async (req, res) => {
-    console.log('test');
-    res.send('test from patch route');
+router.patch('/users/update', auth, async (req, res) => {
+    // Store user in a const named user
+    const user = req.user;
+    // Store update requests from request body in an array
+    const requestUpdates = req.body;
+    // Store updates from request body into an array containing only the request body's properties (e.g., [name, email] etc...)
+    const updateArrayFromUser = Object.keys(requestUpdates);
+    // Store array of updateable properties (user shouldn't update _id, tokens, or any other information as such)
+    const allowedUpdates = ['name', 'email', 'password'];
+    // Check to see if every element from User's updates from request body passes the next condition
+    const isValidOperation = updateArrayFromUser.every((update) => {
+        // Checks to see whether the User's updates from request body is included in allowed updates array
+        return allowedUpdates.includes(update);
+    });
+
+    // If operation is not allowed, deny user ability to change information
+    if (!isValidOperation) {
+        return res.status(400).send({ error: 'Invalid Operation' });
+    }
+
+    try {
+        // For each update,
+        updateArrayFromUser.forEach((update) => {
+            // Update property field will be updated from request body
+            return user[update] = requestUpdates[update];
+        });
+        // Save user updates in database
+        await user.save();
+        // Send user data
+        res.send(user)
+    } catch (e) {
+        res.status(400).send(`errrrrorrrrr: ${e}`);
+    }
 });
 
 /* ------------------------------- DELETE User ------------------------------- */
@@ -62,7 +92,7 @@ router.delete('/users/delete', auth, async (req, res) => {
         const user = await User.findOneAndDelete({
             _id: req.user._id,
         });
-        res.send(user)
+        res.send(user);
     } catch {
         res.status(400).send("Can't Delete Me!");
     }
