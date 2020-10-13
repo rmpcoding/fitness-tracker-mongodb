@@ -45,7 +45,20 @@ const userSchema = new mongoose.Schema({
     ],
 });
 
-/* -------------- Generates JSON web token after user creation -------------- */
+/* ----------------- PREVENTS USER FROM VIEWING TOKENS & PW ----------------- */
+
+userSchema.methods.toJSON = function () {
+    const user = this;
+
+    const userObj = user.toObject();
+
+    delete userObj.password;
+    delete userObj.jsonwebtokens;
+
+    return userObj;
+};
+
+/* -------------- GENERATES JSON WEB TOKEN AFTER USER CREATION -------------- */
 
 userSchema.methods.generateAuthToken = async function () {
     const user = this;

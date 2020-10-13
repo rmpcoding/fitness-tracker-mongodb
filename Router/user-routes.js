@@ -81,7 +81,7 @@ router.patch('/users/update', auth, async (req, res) => {
         // Send user data
         res.send(user)
     } catch (e) {
-        res.status(400).send(`errrrrorrrrr: ${e}`);
+        res.status(400).send(`Error: ${e}`);
     }
 });
 
