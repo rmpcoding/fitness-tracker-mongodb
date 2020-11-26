@@ -1,6 +1,7 @@
 const express = require('express');
 const userRouter = require('./Router/user-routes');
 const studyRouter = require('./Router/study-routes');
+const htmlRouter = require('./Router/html-routes');
 require('./db/mongoose');
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+app.use('/', htmlRouter)
 app.use('/api', userRouter)
 app.use('/api', studyRouter)
 
