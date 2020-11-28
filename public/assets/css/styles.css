@@ -1,0 +1,16 @@
+.button {
+    outline: none;
+    margin: 0;
+    padding: .25em .55em;
+    border: 1px solid black;
+    border-radius: 100px;
+    color: white;
+}
+
+.button.primary {
+    background-color: hsl(203, 90%, 50%);
+}
+
+.button.danger {
+    background-color: hsl(0, 90%, 50%);
+}
