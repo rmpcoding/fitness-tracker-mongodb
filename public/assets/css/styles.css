@@ -27,6 +27,13 @@
         left: -18px;
     }
 
+    .secondary-background-light {
+        position: absolute;
+        z-index: -1;
+        top: 10rem;
+        left: -20px;
+    }
+
     .button {
         position: absolute;
         width: 22rem;
