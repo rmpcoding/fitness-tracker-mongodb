@@ -24,6 +24,7 @@
     .primary-background-teal {
         position: absolute;
         top: 12rem;
+        left: -18px;
     }
 
     .button {
