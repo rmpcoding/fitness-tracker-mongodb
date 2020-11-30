@@ -1,7 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
 .button {
     outline: none;
     margin: 0;
-    padding: .25em .55em;
+    padding: 0.25em 0.55em;
     border: 1px solid black;
     border-radius: 100px;
     color: white;
@@ -13,4 +17,26 @@
 
 .button.danger {
     background-color: hsl(0, 90%, 50%);
+}
+
+@media only screen and (max-width: 480px) {
+
+    .primary-background-teal {
+        position: absolute;
+        top: 12rem;
+    }
+
+    .button {
+        position: absolute;
+        width: 22rem;
+        height: 5rem;
+    }
+
+    .button.primary {
+        bottom: 8rem;
+    }
+
+    .button.danger {
+        bottom: 2rem;
+    }
 }
