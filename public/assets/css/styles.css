@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
 }
 
 .button {
@@ -7,8 +8,11 @@
     margin: 0;
     padding: 0.25em 0.55em;
     border: 1px solid black;
-    border-radius: 100px;
+    border-radius: 10000000px;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .button.primary {
@@ -38,6 +42,8 @@
         position: absolute;
         width: 22rem;
         height: 5rem;
+        font-size: 50px;
+        font-weight: 500;
     }
 
     .button.primary {
