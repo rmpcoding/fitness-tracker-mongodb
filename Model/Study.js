@@ -9,7 +9,7 @@ const studySchema = new mongoose.Schema({
     subject: {
         type: String,
     },
-    source: {
+    sourceURL: {
         type: String,
     },
     time_allotted: {
