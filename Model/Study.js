@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = require('./User');
 require('../db/mongoose');
+require('mongoose-type-url');
 const validator = require('validator').default;
 
 /* -------------- SKELETON OF STUDY SCHEMA - WILL CHANGE SOON -------------- */
