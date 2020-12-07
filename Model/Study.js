@@ -10,8 +10,8 @@ const studySchema = new mongoose.Schema({
     subject: {
         type: String,
     },
-    sourceURL: {
-        type: String,
+    source: {
+        type: mongoose.SchemaTypes.Url,
     },
     time_allotted: {
         type: String,
