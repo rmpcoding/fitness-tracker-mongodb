@@ -3,54 +3,64 @@
     font-family: 'Karla', sans-serif;
 }
 
+html, body {
+    height: 100vh;
+    background: linear-gradient(#545479, #48486C);
+    color: #F9F8FF;
+}
+
+.signup {
+    height: 100vh;
+    display: grid;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: center;
+    text-align: center;
+}
+
+.signup__input {
+    outline: none;
+    border: none;
+    width: 100%;
+    border-radius: .3em;
+    padding: 0.5em 0.75em;
+
+}
+
+.signup__form {
+    text-align: center;
+}
+
 .button {
     outline: none;
-    margin: 0;
-    padding: 0.25em 0.55em;
+    margin: auto;
+    width: 50%;
+    padding: 0.5em 0.75em;
     border: 1px solid black;
-    border-radius: 10000000px;
-    color: white;
+    border-radius: .3em;
+    background-color: hsl(206, 89%, 77%);
+    color: black;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.button.primary {
-    background-color: hsl(203, 90%, 50%);
+.button:hover {
+    cursor: pointer;
 }
 
-.button.danger {
-    background-color: hsl(0, 90%, 50%);
+.button:focus {
+    border: 1px solid hsl(206, 89%, 57%);
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+    outline: none;
 }
 
 @media only screen and (max-width: 480px) {
 
-    .primary-background-teal {
-        position: absolute;
-        top: 12rem;
-        left: -18px;
-    }
-
-    .secondary-background-light {
-        position: absolute;
-        z-index: -1;
-        top: 10rem;
-        left: -20px;
-    }
-
-    .button {
-        position: absolute;
-        width: 22rem;
-        height: 5rem;
-        font-size: 50px;
-        font-weight: 500;
-    }
-
-    .button.primary {
-        bottom: 8rem;
-    }
-
-    .button.danger {
-        bottom: 2rem;
-    }
+    
 }
