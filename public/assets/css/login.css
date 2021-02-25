@@ -3,16 +3,16 @@
     font-family: 'Karla', sans-serif;
 }
 
-html, body {
+body {
     height: 100vh;
-    /* background: linear-gradient(#545479, #48486C); */
+    /* background: linear-gradient(#73eff7, #48486C); */
+    color: #F9F8FF;
     background-image: url('../images/primary-background-teal.svg');
     background-repeat: no-repeat;
     background-position: center;
-    color: #F9F8FF;
 }
 
-.signup {
+.login {
     height: 100vh;
     display: grid;
     justify-content: center;
@@ -21,7 +21,7 @@ html, body {
     text-align: center;
 }
 
-.signup__input {
+.login__input {
     outline: none;
     border: none;
     width: 100%;
@@ -29,7 +29,7 @@ html, body {
     padding: 0.5em 0.75em;
 }
 
-.signup__form {
+.login__form {
     text-align: center;
     margin-bottom: 10px;
 }
@@ -39,10 +39,10 @@ html, body {
     margin: auto;
     width: 50%;
     padding: 0.5em 0.75em;
-    border: 1px solid hsl(191, 100%, 49%);
+    border: 1px solid black;
     border-radius: .3em;
-    background-color: hsl(191, 100%, 49%);
-    color: white;
+    background-color: #00CCF8;
+    color: #F9F8FF;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -50,7 +50,6 @@ html, body {
 
 .button:hover {
     cursor: pointer;
-    background-color: hsl(191, 100%, 46%);
 }
 
 .button:focus {
@@ -60,17 +59,11 @@ html, body {
 
 a {
     text-decoration: none;
-    color: #F9F8FF;
+    color: black;
     outline: none;
 }
 
 @media only screen and (max-width: 480px) {
-    body {
-        height: 100vh;
-        background-image: url('../images/primary-background-teal.svg');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        color: #F9F8FF;
-    }
+
+    
 }
