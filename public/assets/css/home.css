@@ -5,13 +5,14 @@
 
 body {
     height: 100vh;
-    color: #F9F8FF;
+    color: #00191F;
     background-image: url('../images/primary-background-teal.svg');
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: top;
+    background-size: cover;
 }
 
-.login {
+.home {
     height: 100vh;
     display: grid;
     justify-content: center;
@@ -20,15 +21,28 @@ body {
     text-align: center;
 }
 
-.login__input {
+.home__label {
+    display: flex;
+    justify-content: start;
+}
+
+.home__input {
     outline: none;
     border: none;
-    width: 100%;
+    border: 1px solid hsl(184, 89%, 88%);
+    background-color: #fbfaff;
+    color: #324B4D;
+    width: 50vw;
     border-radius: .3em;
     padding: 0.5em 0.75em;
 }
 
-.login__form {
+.home__input:focus {
+    background-color: hsl(184, 89%, 96%);
+    color: #324B4D;
+}
+
+.home__form {
     text-align: center;
     margin-bottom: 10px;
 }
@@ -37,7 +51,6 @@ body {
     outline: none;
     margin: auto;
     width: 50%;
-    margin-bottom: 10px;
     padding: 0.5em 0.75em;
     border: 1px solid hsl(191, 100%, 49%);
     border-radius: .3em;
@@ -59,9 +72,8 @@ body {
 }
 
 a {
-    cursor: pointer;
     text-decoration: none;
-    color: inherit;
+    color: black;
     outline: none;
 }
 
