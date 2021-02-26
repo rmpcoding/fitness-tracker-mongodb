@@ -3,9 +3,8 @@
     font-family: 'Karla', sans-serif;
 }
 
-html, body {
+body {
     height: 100vh;
-    /* background: linear-gradient(#545479, #48486C); */
     background-image: url('../images/primary-background-teal.svg');
     background-repeat: no-repeat;
     background-position: center;
@@ -49,8 +48,8 @@ html, body {
 }
 
 .button:hover {
-    cursor: pointer;
     background-color: hsl(191, 100%, 46%);
+    cursor: pointer;
 }
 
 .button:focus {
@@ -71,6 +70,7 @@ a {
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
+        background-position-y: 90%;
         color: #F9F8FF;
     }
 }

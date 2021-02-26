@@ -5,7 +5,6 @@
 
 body {
     height: 100vh;
-    /* background: linear-gradient(#73eff7, #48486C); */
     color: #F9F8FF;
     background-image: url('../images/primary-background-teal.svg');
     background-repeat: no-repeat;
@@ -39,9 +38,9 @@ body {
     margin: auto;
     width: 50%;
     padding: 0.5em 0.75em;
-    border: 1px solid black;
+    border: 1px solid hsl(191, 100%, 49%);
     border-radius: .3em;
-    background-color: #00CCF8;
+    background-color: hsl(191, 100%, 49%);
     color: #F9F8FF;
     display: flex;
     justify-content: center;
@@ -49,6 +48,7 @@ body {
 }
 
 .button:hover {
+    background-color: hsl(191, 100%, 46%);
     cursor: pointer;
 }
 
@@ -64,6 +64,14 @@ a {
 }
 
 @media only screen and (max-width: 480px) {
-
+    body {
+        height: 100vh;
+        background-image: url('../images/primary-background-teal.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        background-position-y: bottom;
+        color: #F9F8FF;
+    }
     
 }
