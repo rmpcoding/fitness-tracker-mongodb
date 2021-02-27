@@ -39,7 +39,6 @@ body {
 
 .home__input:focus {
     background-color: hsl(184, 89%, 96%);
-    color: #324B4D;
 }
 
 .home__form {
@@ -55,7 +54,7 @@ body {
     border: 1px solid hsl(191, 100%, 49%);
     border-radius: .3em;
     background-color: hsl(191, 100%, 49%);
-    color: #F9F8FF;
+    color: #324B4D;
     display: flex;
     justify-content: center;
     align-items: center;
