@@ -14,7 +14,7 @@
     <body>
         <div class="signup" role="main">
             <h1 class="signup__header">Sign Up!</h1>
-            <form class="signup__form" action="" method="get">
+            <form class="signup__form" action="/home" method="get">
                 <label for="fname">First name:</label>
                 <input
                     class="signup__input"
@@ -43,12 +43,13 @@
                     id="password"
                     name="password"
                 /><br /><br />
-                <input type="submit" class="button" value="Sign Up!" />
+                <input type="submit" class="button" value="Sign Up!" data-submit="submit" />
             </form>
             <a href="/login">
                 Login Here!
             </a>
         </div>
     </body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/signup.js"></script>
 </html>
