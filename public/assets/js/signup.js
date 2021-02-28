@@ -7,11 +7,6 @@ const submit = document.querySelector('.button');
 submit.addEventListener('click', (e) => {
     e.preventDefault(); //prevents loading to /home
 
-    console.log(firstName.value);
-    console.log(lastName.value);
-    console.log(email.value);
-    console.log(password.value);
-
     firstName = firstName.value;
     lastName = lastName.value;
     
@@ -32,7 +27,6 @@ submit.addEventListener('click', (e) => {
             console.log(response);
         })
         .catch(function (error) {
-            console.log('hi');
             console.log(error);
         });
 });
