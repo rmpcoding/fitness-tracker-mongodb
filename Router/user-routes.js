@@ -24,15 +24,13 @@ router.post('/users/create', async (req, res) => {
 /* ------------------------------- LOGIN User -------------------------------- */
 // Does not require Auth middleware
 router.post('/users/login', async (req, res) => {
-    console.log(req.body.email);
-    console.log(req.body.password);
-
     try {
-        const user = await loginByCredentials(
+        const user = await User.findByCredentials(
             req.body.email,
             req.body.password
         );
-        res.send(user);
+        const token = await user.generateAuthToken();
+        // return res.sendFile(path.resolve('./public/assets/html/home.html'))
     } catch (e) {
         res.status(401).send('Invalid Login!');
     }
@@ -45,6 +43,26 @@ router.get('/users/profile', auth, async (req, res) => {
         res.send(req.user);
     } catch (e) {
         res.status(401).send();
+    }
+});
+
+/* ------------------------------- LOGOUT USER ------------------------------ */
+
+router.post('/users/logout', auth, async (req, res) => {
+    const user = req.user;
+
+    console.log(user)
+
+    try {
+        user.jsonwebtokens = user.jsonwebtokens.filter((token) => {
+            return token.token !== req.token;
+        });
+
+        await user.save();
+
+        res.send('logged out');
+    } catch (err) {
+        res.status(500).send();
     }
 });
 

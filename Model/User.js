@@ -85,10 +85,8 @@ userSchema.virtual('study_notes', {
 
 /* ------------------------------ LOGS IN USER ------------------------------ */
 
-userSchema.statics.loginByCredentials = async function (email, password) {
-    const user = this;
-
-    User.find({ email });
+userSchema.statics.findByCredentials = async (email, password) => {
+    const user = await User.findOne({ email });
 
     if (!user) {
         throw new Error('Invalid Credentials!');

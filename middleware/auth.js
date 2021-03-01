@@ -28,7 +28,7 @@ const auth = async (req, res, next) => {
         // Call next to continue to endpoint as this is a middleware
         next();
     } catch {
-        res.status(401).send({ Error: 'Invalid Login!' });
+        res.status(401).send({ Error: 'Please Authenticate!' });
     }
 };
 

@@ -10,7 +10,7 @@ submit.addEventListener('click', (e) => {
     firstName = firstName.value;
     lastName = lastName.value;
     
-    let name = `${firstName} ${lastName}`;
+    let name = `${firstName} ${lastName}`.trim();
     email = email.value;
     password = password.value;
 
@@ -25,8 +25,10 @@ submit.addEventListener('click', (e) => {
     })
         .then(function (response) {
             console.log(response);
+            window.location.replace('/home')
         })
         .catch(function (error) {
             console.log(error);
+            alert('There was an error processing your request, please refresh the page to try again')
         });
 });
