@@ -31,8 +31,12 @@ router.post('/users/login', async (req, res) => {
         );
         const token = await user.generateAuthToken();
         // return res.sendFile(path.resolve('./public/assets/html/home.html'))
+        res.send({
+            user,
+            token,
+        });
     } catch (e) {
-        res.status(401).send('Invalid Login!');
+        res.status(400).send('Invalid Login!');
     }
 });
 
@@ -60,7 +64,7 @@ router.post('/users/logout', auth, async (req, res) => {
 
         await user.save();
 
-        res.send('logged out');
+        res.send('You are now logged out');
     } catch (err) {
         res.status(500).send();
     }

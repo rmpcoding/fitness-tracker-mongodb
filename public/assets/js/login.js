@@ -20,6 +20,7 @@ submit.addEventListener('click', (e) => {
             console.log(response);
         })
         .catch(function (error) {
+            console.log(error)
             alert('There was an error processing your request, please refresh the page to try again')
         });
 });

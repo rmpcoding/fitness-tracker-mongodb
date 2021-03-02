@@ -72,6 +72,8 @@ userSchema.methods.generateAuthToken = async function () {
 
     await user.save();
 
+    console.log(user)
+
     return token;
 };
 
@@ -97,6 +99,8 @@ userSchema.statics.findByCredentials = async (email, password) => {
     if (!isMatch) {
         throw new Error('Invalid Credentials!');
     }
+
+    console.log(user, '\ninside User.js')
 
     return user;
 };
